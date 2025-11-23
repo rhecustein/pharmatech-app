@@ -16,8 +16,15 @@ import '../../features/cart/presentation/pages/checkout_page.dart';
 import '../../features/orders/presentation/pages/orders_page.dart';
 import '../../features/orders/presentation/pages/order_detail_page.dart';
 import '../../features/prescription/presentation/pages/prescriptions_page.dart';
+import '../../features/prescription/presentation/pages/prescription_upload_page.dart';
+import '../../features/prescription/presentation/pages/prescription_detail_page.dart';
 import '../../features/scanner/presentation/pages/barcode_scanner_page.dart';
 import '../../features/profile/presentation/pages/profile_page.dart';
+import '../../features/profile/presentation/pages/edit_profile_page.dart';
+import '../../features/profile/presentation/pages/addresses_page.dart';
+import '../../features/orders/presentation/pages/order_tracking_page.dart';
+import '../../features/consultation/presentation/pages/pharmacist_list_page.dart';
+import '../../features/consultation/presentation/pages/chat_consultation_page.dart';
 import '../../features/notifications/presentation/pages/notifications_page.dart';
 import '../../features/settings/presentation/pages/settings_page.dart';
 import '../../features/settings/presentation/pages/about_page.dart';
@@ -123,12 +130,60 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           return OrderDetailPage(orderId: id);
         },
       ),
+      GoRoute(
+        path: '/orders/:id/tracking',
+        name: 'order-tracking',
+        builder: (context, state) {
+          final id = state.pathParameters['id']!;
+          return OrderTrackingPage(orderId: id);
+        },
+      ),
 
       // Prescription Routes
       GoRoute(
         path: RouteConstants.prescriptions,
         name: 'prescriptions',
         builder: (context, state) => const PrescriptionsPage(),
+      ),
+      GoRoute(
+        path: '/prescriptions/upload',
+        name: 'prescription-upload',
+        builder: (context, state) => const PrescriptionUploadPage(),
+      ),
+      GoRoute(
+        path: '/prescriptions/:id',
+        name: 'prescription-detail',
+        builder: (context, state) {
+          final id = state.pathParameters['id']!;
+          return PrescriptionDetailPage(prescriptionId: id);
+        },
+      ),
+
+      // Profile Routes
+      GoRoute(
+        path: '/profile/edit',
+        name: 'edit-profile',
+        builder: (context, state) => const EditProfilePage(),
+      ),
+      GoRoute(
+        path: '/profile/addresses',
+        name: 'addresses',
+        builder: (context, state) => const AddressesPage(),
+      ),
+
+      // Consultation Routes
+      GoRoute(
+        path: '/consultation',
+        name: 'consultation',
+        builder: (context, state) => const PharmacistListPage(),
+      ),
+      GoRoute(
+        path: '/consultation/chat/:id',
+        name: 'chat-consultation',
+        builder: (context, state) {
+          final id = state.pathParameters['id']!;
+          return ChatConsultationPage(pharmacistId: id);
+        },
       ),
 
       // Scanner
