@@ -1,0 +1,20 @@
+# Build configuration for code generation
+targets:
+  $default:
+    builders:
+      hive_generator:hive_generator:
+        enabled: true
+        options:
+          # Generate TypeAdapters for Hive models
+          generate_for:
+            - lib/**/*.dart
+
+      # Optional: Add other generators like freezed, json_serializable, etc.
+      # freezed:freezed:
+      #   enabled: true
+
+      # json_serializable:json_serializable:
+      #   enabled: true
+
+# To generate Hive type adapters, run:
+# flutter pub run build_runner build --delete-conflicting-outputs
